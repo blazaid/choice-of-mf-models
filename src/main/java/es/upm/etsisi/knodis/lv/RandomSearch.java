@@ -42,7 +42,7 @@ public class RandomSearch {
 
         ParamsGrid paramsGrid = new ParamsGrid();
 
-        /*paramsGrid.addParam("numFactors", new int[]{4, 8, 12});
+        paramsGrid.addParam("numFactors", new int[]{4, 8, 12});
         paramsGrid.addParam("lambda", new double[]{0.001, 0.01, 0.1, 1.0});
         paramsGrid.addParam("gamma", new double[]{0.001, 0.01, 0.1, 1.0});
         paramsGrid.addParam("numIters", new int[]{25, 50, 75, 100});
@@ -98,7 +98,7 @@ public class RandomSearch {
 
         randomSearchCV = new RandomSearchCV(datamodel, paramsGrid, BeMF.class, MAE.class, CV, COVERAGE, RANDOM_SEED);
         randomSearchCV.fit();
-        randomSearchCV.exportResults("results/" + DATASET + "/bemf.csv");*/
+        randomSearchCV.exportResults("results/" + DATASET + "/bemf.csv");
 
 
         // BNMF
@@ -112,7 +112,7 @@ public class RandomSearch {
 
         paramsGrid.addFixedParam("seed", RANDOM_SEED);
 
-        RandomSearchCV randomSearchCV = new RandomSearchCV(datamodel, paramsGrid, BNMF.class, MAE.class, CV, COVERAGE, RANDOM_SEED);
+        randomSearchCV = new RandomSearchCV(datamodel, paramsGrid, BNMF.class, MAE.class, CV, COVERAGE, RANDOM_SEED);
         randomSearchCV.fit();
         randomSearchCV.exportResults("results/" + DATASET + "/bnmf.csv");
 
