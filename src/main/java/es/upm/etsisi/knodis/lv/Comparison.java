@@ -8,16 +8,14 @@ import es.upm.etsisi.cf4j.recommender.Recommender;
 import es.upm.etsisi.cf4j.recommender.matrixFactorization.*;
 import es.upm.etsisi.cf4j.util.plot.ColumnPlot;
 import es.upm.etsisi.cf4j.util.plot.LinePlot;
-import es.upm.etsisi.cf4j.util.plot.PlotSettings;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Comparison {
 
-    private static final String DATASET = "anime";
+    private static final String DATASET = "bgg";
 
     private static final long RANDOM_SEED = 42;
 
@@ -78,6 +76,19 @@ public class Comparison {
 
         } else if(DATASET.equals("anime")) {
             datamodel = BenchmarkDataModels.MyAnimeList();
+
+            ratings = new double[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            threshold = 8;
+
+            pmfParams = Map.of("numIters", 100, "lambda", 0.001, "seed", RANDOM_SEED, "gamma", 0.001, "numFactors", 4);;
+            biasedmfParams = Map.of("numIters", 75, "lambda", 0.1, "seed", RANDOM_SEED, "gamma", 0.01, "numFactors", 4);
+            bemfParamas = Map.of("numIters", 100, "seed", RANDOM_SEED, "ratings", ratings, "learningRate", 0.001, "regularization", 1.0, "numFactors", 4);
+            nmfParamas = Map.of("seed", RANDOM_SEED, "numIters", 100, "numFactors", 4);
+            bnmfParams = Map.of("numIters", 100, "seed", RANDOM_SEED, "beta", 5.0, "alpha", 0.4, "numFactors", 8);
+            urpParams = Map.of("numIters", 25, "seed", RANDOM_SEED, "ratings", ratings, "numFactors", 4);
+
+        } else if(DATASET.equals("bgg")) {
+            datamodel = BenchmarkDataModels.BoardGameGeek();
 
             ratings = new double[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
             threshold = 8;
@@ -201,7 +212,7 @@ public class Comparison {
         noveltyPlot.draw();
         noveltyPlot.exportData("results/" + DATASET + "/novelty.csv");
 
-        // recall
+        // Precision
 
         LinePlot precisionPlot = new LinePlot(NUM_RECOMMENDATIONS, "Number of recommendations", "Precision");
 
@@ -218,7 +229,7 @@ public class Comparison {
         precisionPlot.draw();
         precisionPlot.exportData("results/" + DATASET + "/precision.csv");
 
-        // recall
+        // Recall
 
         LinePlot recallPlot = new LinePlot(NUM_RECOMMENDATIONS, "Number of recommendations", "Recall");
 

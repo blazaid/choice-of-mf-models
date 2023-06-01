@@ -9,7 +9,7 @@ import es.upm.etsisi.cf4j.util.optimization.RandomSearchCV;
 
 public class RandomSearch {
 
-    private static final String DATASET = "anime";
+    private static final String DATASET = "bgg";
 
     private static final long RANDOM_SEED = 42;
 
@@ -34,6 +34,9 @@ public class RandomSearch {
             ratings = new double[]{0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0};
         } else if (DATASET.equals("anime")) {
             datamodel = BenchmarkDataModels.MyAnimeList();
+            ratings = new double[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        } else if (DATASET.equals("bgg")) {
+            datamodel = BenchmarkDataModels.BoardGameGeek();
             ratings = new double[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         }
 
