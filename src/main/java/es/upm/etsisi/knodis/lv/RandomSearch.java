@@ -12,6 +12,7 @@ import es.upm.etsisi.cf4j.util.optimization.RandomSearchCV;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 
 public class RandomSearch {
     private static final Logger logger = Logger.getLogger(RandomSearchCV.class.getName());
@@ -40,7 +41,7 @@ public class RandomSearch {
             ratings = new double[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         } else if (DATASET.equals("bgg")) {
             datamodel = BenchmarkDataModels.BoardGameGeek();
-            ratings = new double[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            ratings = IntStream.range(10, 101).mapToDouble(i -> i / 10.0).toArray();
         } else {
             throw new Exception(DATASET + " not known");
         }
